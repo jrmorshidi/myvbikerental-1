@@ -299,15 +299,21 @@ else{
 							
 							var diff = $('#setDatePick').datepicker("getDate") - $('#setDateDrop').datepicker("getDate");
 							var diff2 = diff / (1000 * 60 * 60 * 24) * -1 + 1;
+							console.log(diff2);
+
+							var target = document.querySelector('#price_per_unit')
+							// create an observer instance
+							var observer = new MutationObserver(function(mutations) {
+								console.log(target.innerText);   
+							});
 							
-							// var diff = $('#diff').val();
 							var price_per_unit = $('#price_per_unit').html(data);
+							console.log(price_per_unit);
+
 							var total_price = diff2 * price_per_unit;
 							$('#total_price').text(total_price);
 
-							console.log(diff2);
-							console.log(price_per_unit);
-							console.log(total_price);
+							
 						});
 						
 						
@@ -339,7 +345,11 @@ else{
 								<textarea class="form-control"  name="Coments" ></textarea>
 							</div>
 						</div>
-					</div>	
+					</div>
+
+					<?php
+						echo $result;
+					?>
 
 
 					<div class="col-sm-12 checkbox">

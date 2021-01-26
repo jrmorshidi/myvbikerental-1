@@ -2,16 +2,16 @@
 $root = "../";
 include $root . 'db.php';
 
-include $root . "account/adHeader.php";
-
 session_start();
-
 error_reporting(0);
-
 $dt = date("Y-m-d");
 $tim = date("H:i:s");
+
 if (isset($_SESSION['adminID'])) {
 	header('Location: ' . $root . 'account/adminAccount.php');
+}
+else if (isset($_SESSION['adminID'])) {
+	include("logout.php");
 }
 ?>
 <!-- header section -->
@@ -24,8 +24,9 @@ if (isset($_SESSION['adminID'])) {
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<title>MY V Bike Rental - Admin Login</title>
 	<link href="<?php echo $root ?>assets/css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="icon" href="favicon.ico" type="image/x-icon">	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
 	<!-- Custom Css -->
 	<link href="<?php echo $root ?>assets/css/main.css" rel="stylesheet">
 	<link href="<?php echo $root ?>assets/css/login.css" rel="stylesheet">
@@ -36,12 +37,15 @@ if (isset($_SESSION['adminID'])) {
 
 <body class="theme-deep-orange login-page authentication">
 	<!-- header section -->
-
 	<?php
-
-	$err = '';
 	if (isset($_POST['submit'])) {
-		$sql = "SELECT * FROM admin WHERE username='$_POST[loginid]' AND password='$_POST[password]'";
+		$err = '';
+		$username = $_POST['loginid'];
+		$password = $_POST['password'];
+		$password = md5($password);
+		
+		// Verify that user is in database
+		$sql = "SELECT * FROM admin WHERE username = '$username'";
 		$qsql = mysqli_query($connect, $sql);
 		if (mysqli_num_rows($qsql) == 1) {
 			$rslogin = mysqli_fetch_array($qsql);
@@ -55,37 +59,35 @@ if (isset($_SESSION['adminID'])) {
 			}
 		} else {
 			$err = "<div class='alert alert-danger'>
-		<strong>Oh !</strong> Change a few things up and try submitting again.
-	</div>";
+					<strong>Oh !</strong> Change a few things up and try submitting again.</div>";
 		}
-	} ?>
+	}
 
+	?>
 	<div class="container">
 		<div class="login-container">
-			<div id="err" class="content"><?php echo $err; ?></div>
-			<div class="card-top content"></div>
-			<div class="card content">
-				<h1 class="title"><span>MY V BIKE RENTAL</span>ADMIN Login</h1>
-				<div class="col-md-12">
-					<form method="post" action="" name="frmadminlogin" id="sign_in" onSubmit="return validateform()">
-						<div class="input-group"> <span class="input-group-addon"> <i class="zmdi zmdi-account"></i> </span>
-							<div class="form-line">
-								<input type="text" name="loginid" id="loginid" class="form-control" placeholder="Username" />
-							</div>
+		<div id="err" class="content"><?php echo $err; ?></div>
+		<div class="card-top content"></div>
+		<div class="card content">
+			<h1 class="title"><span>MY V BIKE RENTAL</span>Admin Login</h1>
+			<div class="col-md-12">
+				<form method="post" action="" name="frmadminlogin" id="sign_in" onSubmit="return validateform()">
+					<div class="input-group"> <span class="input-group-addon"> <i class="zmdi zmdi-account"></i> </span>
+						<div class="form-line">
+							<input type="text" name="loginid" id="loginid" class="form-control" placeholder="Username" />
 						</div>
-						<div class="input-group"> <span class="input-group-addon"> <i class="zmdi zmdi-lock"></i> </span>
-							<div class="form-line">
-								<input type="password" name="password" id="password" class="form-control" placeholder="Password" />
-							</div>
+					</div>
+					<div class="input-group"> <span class="input-group-addon"> <i class="zmdi zmdi-lock"></i> </span>
+						<div class="form-line">
+							<input type="password" name="password" id="password" class="form-control" placeholder="Password" />
 						</div>
-						<div>
-							<div class="text-center">
-								<input type="submit" name="submit" id="submit" value="Login" class="btn btn-raised waves-effect g-bg-gy" />
-							</div>
-							<div class="text-center"> <a href="forgot-password.html">Forgot Password?</a></div>
-						</div>
-					</form>
-				</div>
+					</div>
+					<div>
+						<div class="text-center">
+							<input type="submit" name="submit" id="submit" value="Login" class="btn btn-raised waves-effect g-bg-gy" />
+						</div>		
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

@@ -52,7 +52,7 @@ include $root . "account/adFormHeader.php";
             $sqlstat = "SELECT * FROM status WHERE statusID='$rs[status]'";
             $qsqlstat = mysqli_query($connect, $sqlstat);
             $rsstat = mysqli_fetch_array($qsqlstat);
-            if (strtotime($rs['startDate']) < strtotime('now') && $rsstat['statusDescription'] == "Pending") {
+            if (strtotime($rs['endDate']) < strtotime('now') && $rsstat['statusDescription'] == "Pending") {
               echo "<script>console.log('done')</script>";
               $rsstat['statusDescription'] = "Done";
               $rs['status'] = 3;

@@ -35,19 +35,27 @@ if (isset($_SESSION['userID'])) {
 	<!-- header section -->
 
 	<?php
-
-	$err = '';
 	if (isset($_POST['submit'])) {
-		$sql = "INSERT INTO users(username,password,email,mobileNo,address) values('$_POST[loginid]','$_POST[password]','$_POST[email]','$_POST[mobileno]','$_POST[address]')";
-		if ($qsql = mysqli_query($connect, $sql)) {
-			echo '<script>';
-			echo "alert(\"Signed up successfully! Please sign in now\")";
-			echo '</script>';
-			$link = $root . 'account/accountlogin.php';
-			echo "<meta http-equiv='refresh' content='0;url='$link'>";
+		$err = '';
+		$password = md5($_POST['password']);
+
+		$sql = "SELECT * FROM users WHERE username = '$_POST[loginid]' OR email = '$_POST[email]'";
+		$qsql = mysqli_query($connect, $sql);
+		if (mysqli_num_rows($qsql) == 0) {
+			$sql = "INSERT INTO users(username,password,email,mobileNo,address) values('$_POST[loginid]','$password','$_POST[email]','$_POST[mobileno]','$_POST[address]')";
+			if ($qsql = mysqli_query($connect, $sql)) {
+				echo '<script>';
+				echo "alert(\"Signed up successfully! Please sign in now\")";
+				echo '</script>';
+				$link = $root . 'account/login.php';
+				echo "<meta http-equiv='refresh' content='0;url='$link'>";
+			} else {
+				echo mysqli_error($connect);
+			}
 		} else {
-			echo mysqli_error($connect);
-		}
+			$err = "<div class='alert alert-danger'>
+					<strong>Oh !</strong>Username/ Email already exist. Please try again.</div>";
+		}	
 	}
 
 	?>

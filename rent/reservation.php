@@ -134,17 +134,13 @@ if (isset($_GET['bike']) && $_GET['bike'] != '') {
 							<div class="h2 mb-3"><?php echo $bike['brand'] . ' ' .  $bike['model'] ?></div>
 							<div class="h2 mb-5">RM <?php echo $bike['price'] ?></div>
 							<div id="detail" class="mb-5">
-								<div class="detail-row row">
-									<div class="detail-label col-5 pl-0">Availability</div>
-									<div class="detail-value col pr-0">
-										<?php
-										if ($available['count'] > 0) {
-											echo 'in stock';
-										} else {
-											echo 'out of stock';
-										} ?>
-									</div>
-								</div>
+								<?php
+									if ($available['count'] <= 0) {
+										echo'<div class="detail-row row">
+										<div class="detail-label col-5 pl-0">Out of stock</div>
+										</div>';
+									}
+								?>
 							</div>
 							<?php
 								if ($available['count'] > 0) {

@@ -60,6 +60,14 @@ if (isset($_GET['bike']) && $_GET['bike'] != '') {
 <body>
 	<?php include $root . 'navbar.php' ?>
 	<section>
+		<div class="container">
+			<div class="main content-border">
+				<div class="forecast">
+					<?php include $root . 'forecast.php'; ?>
+				</div>
+			</div>
+		</div>
+
 		<?php include $root . 'sidenavigation.php' ?>
 		<div class="container">
 			<div class="main content-border">
@@ -138,49 +146,49 @@ if (isset($_GET['bike']) && $_GET['bike'] != '') {
 									</div>
 								</div>
 							</div>
-							<div id="pick-up" class="mb-3">
-								<label for="date-input" class="control-label">Pick up Date/Time</label>
-								<div class="row">
-									<div class="col pl-0" id="pick-up-date">
-										<input class="custom-form-control" type="text" name="startDate" id="setDatePick">
+							<?php
+								if ($available['count'] > 0) {
+									echo '
+								
+									<div id="pick-up" class="mb-3">
+										<label for="date-input" class="control-label">Pick up Date/Time</label>
+										<div class="row">
+											<div class="col pl-0" id="pick-up-date">
+												<input class="custom-form-control" type="text" name="startDate" id="setDatePick">
+											</div>
+											<div class="col-4 pr-0" id="pick-up-time">
+												<input class="custom-form-control" type="time" name="startTime" id="setTimePick">
+											</div>
+										</div>
 									</div>
-									<div class="col-4 pr-0" id="pick-up-time">
-										<input class="custom-form-control" type="time" name="startTime" id="setTimePick">
+									<div id="drop-off" class="mb-3">
+										<label for="date-input" class="control-label">Drop off Date/Time</label>
+										<div class="row">
+											<div class="col pl-0" id="drop-off-date">
+												<input class="custom-form-control" type="text" name="endDate" id="setDateDrop">
+											</div>
+											<div class="col-4 pr-0" id="drop-off-time">
+												<input class="custom-form-control" type="time" name="endTime" id="setTimeDrop">
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-							<div id="drop-off" class="mb-3">
-								<label for="date-input" class="control-label">Drop off Date/Time</label>
-								<div class="row">
-									<div class="col pl-0" id="drop-off-date">
-										<input class="custom-form-control" type="text" name="endDate" id="setDateDrop">
-									</div>
-									<div class="col-4 pr-0" id="drop-off-time">
-										<input class="custom-form-control" type="time" name="endTime" id="setTimeDrop">
-									</div>
-								</div>
-							</div>
-							<div id="message" class="my-3">
-								<label for="message" class="control-label" id="message"> Message</label>
-								<textarea class="custom-form-control custom-textarea" name="Coments" rows="3" cols="50" style="resize: none;"></textarea>
-							</div>
+									<div id="message" class="my-3">
+										<label for="message" class="control-label" id="message"> Message</label>
+										<textarea class="custom-form-control custom-textarea" name="Coments" rows="3" cols="50" style="resize: none;"></textarea>
+									</div>';
 
-							<?php include $root . 't&c.html' ?>
-							<div class="form-group mt-4">
-								<div id="sendButton">
-									<button type="submit" id="submit" class="btn btn-warning" name="reserve">Place order</button>
-								</div>
+									include $root . 't&c.html';
+
+									echo'<div class="form-group mt-4">
+										<div id="sendButton">
+											<button type="submit" id="submit" class="btn btn-warning" name="reserve">Place order</button>
+										</div>';
+								}
+							?>
 							</div>
 						</div>
 					</div>
 				</form>
-			</div>
-		</div>
-		<div class="container">
-			<div class="main content-border">
-				<div class="forecast">
-					<?php include $root . 'forecast.php'; ?>
-				</div>
 			</div>
 		</div>
 	</section>

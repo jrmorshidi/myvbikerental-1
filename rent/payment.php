@@ -34,6 +34,13 @@ if (isset($_POST['confirm'])) {
 <body>
     <?php include $root . 'navbar.php' ?>
     <section>
+        <div class="container">
+            <div class="main content-border">
+                <div class="forecast">
+                    <?php include $root . 'forecast.php'; ?>
+                </div>
+            </div>
+        </div>
         <?php include $root . 'sidenavigation.php' ?>
         <div class="container">
             <div class="main content-border">
@@ -77,7 +84,7 @@ if (isset($_POST['confirm'])) {
                             <div class="row mb-2">
                                 <div class="detail-label col-7 pl-0">Total Day(s)</div>
                                 <div class="col pr-0">
-                                    <input id='diff' class="custom-form-control text-right" value="<?php echo $_SESSION['diff']; ?>" disabled>
+                                    <input id='diff' class="custom-form-control text-right" value="<?php echo $_SESSION['diff'] + 1; ?>" disabled>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -89,6 +96,10 @@ if (isset($_POST['confirm'])) {
                             <div class="row mb-2">
                                 <div class="detail-label col-7 pl-0">Total Price (RM)</div>
                                 <div class="col pr-0">
+                                    <?php
+                                        $total_price = ($_SESSION['diff'] + 1) * $_SESSION['bikePrice'];
+                                        $_SESSION['totalPrice'] = number_format($total_price, 2, '.', '');
+                                    ?>
                                     <input id='total_price' class="custom-form-control text-right" value="<?php echo $_SESSION['totalPrice']; ?>" disabled>
                                 </div>
                             </div>
@@ -101,6 +112,11 @@ if (isset($_POST['confirm'])) {
                             <div class="row mb-2 mb-4">
                                 <div class="detail-label col-7 pl-0">Total Price After Discount(RM)</div>
                                 <div class="col pr-0">
+                                    <?php
+                                        $totalprice_afterdiscount = $_SESSION['totalPrice'] - $_SESSION['discountRate'];
+                                        $_SESSION['totalprice_afterdiscount'] = number_format($totalprice_afterdiscount, 2, '.', '');
+                                    ?>
+                                    
                                     <input id='total_price_to_pay' class="custom-form-control text-right" value="<?php echo $_SESSION['totalprice_afterdiscount']; ?>" disabled>
                                 </div>
                             </div>
@@ -123,13 +139,7 @@ if (isset($_POST['confirm'])) {
                 </form>
             </div>
         </div>
-        <div class="container">
-            <div class="main content-border">
-                <div class="forecast">
-                    <?php include $root . 'forecast.php'; ?>
-                </div>
-            </div>
-        </div>
+        
     </section>
     <?php include $root . 'footer.html' ?>
 </body>

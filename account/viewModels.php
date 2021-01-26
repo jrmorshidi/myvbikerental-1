@@ -1,6 +1,7 @@
 <?php
 include("adFormHeader.php");
-include("db.php");
+$root = "../";
+include $root . 'db.php';
 ?>
 
 <div class="container-fluid">

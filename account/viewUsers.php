@@ -1,6 +1,7 @@
 <?php
 include("adFormHeader.php");
-include("db.php");
+$root = "../";
+include $root . 'db.php';
 if(isset($_GET['delid']))
 {
 	$sql ="DELETE FROM users WHERE userID='$_GET[delid]'";

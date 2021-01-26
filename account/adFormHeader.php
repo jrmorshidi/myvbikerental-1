@@ -39,7 +39,7 @@ $tim = date("H:i:s");
     <nav class="navbar clearHeader">
         <div class="col-12">
             <div class="navbar-header"> <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand"
-                    href="index.html">MY V Bike Rental</a> </div>
+                    href="../index.php">MY V Bike Rental</a> </div>
             <ul class="nav navbar-nav navbar-right">
                 <!-- Notifications -->
                 <li>
@@ -96,7 +96,7 @@ $tim = date("H:i:s");
 
                             <li><a href="<?php echo $root; ?>account/addBikes.php">Add Bikes</a></li>
                             <li><a href="<?php echo $root; ?>account/viewBikes.php">View Bikes</a></li>
-
+                            <li><a href="<?php echo $root; ?>account/viewModels.php">View Models</a></li>
                         </ul>
                     </li> 
                 </ul>

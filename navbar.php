@@ -6,7 +6,7 @@
         </a>
         <div class="user-menu">
             <a href="<?php echo $root ?>account/login.php"><i class="fas fa-user-circle"></i></a>
-            <a href="search"><i class="fas fa-search"></i></a>
+            <a href="#search-modal" data-toggle="modal"><i class="fas fa-search"></i></a>
             <a onclick="menu();return false;" href="#"><i class="fas fa-bars"></i></a>
         </div>
     </div>
@@ -37,7 +37,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="get" action="<?php echo $root ?>rent">
                     <div class="form-group row m-3">
                         <input type="text" class="form-control" name="search" placeholder="Search">
                     </div>

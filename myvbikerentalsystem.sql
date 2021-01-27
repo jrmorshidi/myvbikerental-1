@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 25, 2021 at 05:58 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.0
+-- Generation Time: Jan 27, 2021 at 07:27 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `myvbikerentalsystem`
+-- Database: `myvbikerentalsystem1`
 --
 
 -- --------------------------------------------------------
@@ -40,8 +41,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`adminID`, `username`, `password`, `email`, `statusID`) VALUES
-(1, 'admin', '123456789', 'admin@gmail.com', 1),
-(2, 'admin1', '123456789', 'admin1@gmail.com', 2);
+(1, 'admin', '12345678925f9e794323b4538', 'admin@gmail.com', 1),
+(2, 'admin1', '12345678925f9e794323b4538', 'admin1@gmail.com', 2);
 
 -- --------------------------------------------------------
 
@@ -61,7 +62,7 @@ CREATE TABLE `bikes` (
 --
 
 INSERT INTO `bikes` (`ID`, `model`, `plate_no`, `status`) VALUES
-(1, 1, 'WAA2458', 1),
+(1, 1, 'WAA2458', 2),
 (2, 1, 'WBB4632', 2),
 (3, 2, 'WA3414F', 3),
 (4, 2, 'VA1573', 4);
@@ -210,7 +211,9 @@ INSERT INTO `reservations` (`reservationID`, `userID`, `bikeID`, `startDate`, `e
 (4, 2, 2, '2021-01-11', '2021-01-13', '09:00:00', '12:00:00', '65', '', 3),
 (5, 1, 1, '2021-01-20', '2021-01-21', '14:12:00', '13:12:00', '90', '', 3),
 (16, 1, 2, '2021-01-27', '2021-01-28', '12:12:00', '15:14:00', '25.00', '', 4),
-(17, 1, 2, '2021-01-26', '2021-01-29', '14:15:00', '16:15:00', '71.25', '', 4);
+(17, 1, 2, '2021-01-26', '2021-01-29', '14:15:00', '16:15:00', '71.25', '', 4),
+(18, 1, 1, '2021-01-27', '2021-01-28', '10:00:00', '15:30:00', '20.00', '', 4),
+(19, 1, 1, '2021-01-27', '2021-01-28', '10:00:00', '15:30:00', '20.00', '', 4);
 
 -- --------------------------------------------------------
 
@@ -231,7 +234,8 @@ INSERT INTO `status` (`statusID`, `statusDescription`) VALUES
 (1, 'Active'),
 (2, 'Inactive'),
 (3, 'Done'),
-(4, 'Pending');
+(4, 'Pending'),
+(5, 'Cancelled');
 
 -- --------------------------------------------------------
 
@@ -256,7 +260,9 @@ INSERT INTO `users` (`userID`, `username`, `password`, `email`, `mobileNo`, `add
 (1, 'user', '123456789', 'user123@gmail.com', 12355555, '1, Jln Melaka, 66000, Melaka'),
 (2, 'user1', '123456789', 'user1@gmail.com', 1234567890, '300, Jln Alor, Bdr Jaya, 26300, Kedah'),
 (3, 'user2', '123456789', 'user2@gmail.com', 123456789, '24, Jln Wawasan, Bdr Hijau, 204491, Kuala Lumpur'),
-(4, 'user3', '123456789', 'user3@gmail.com', 123456789, '19, Jln Bangau, Bdr Puchong Jaya, 56000, Selangor');
+(4, 'user3', '123456789', 'user3@gmail.com', 123456789, '19, Jln Bangau, Bdr Puchong Jaya, 56000, Selangor'),
+(5, 'user4', '25f9e794323b453885f5181f1', 'user4@gmail.com', 123483921, '50, Jln Ramah, Bdr Maju, 23090, Kuala Lumpur'),
+(8, 'user5', '25f9e794323b453885f5181f1', 'user5@gmail.com', 19397279, '17, Jln Cempaka, Tmn Serdang, 43090, Selangor');
 
 --
 -- Indexes for dumped tables
@@ -366,7 +372,7 @@ ALTER TABLE `contact_us`
 -- AUTO_INCREMENT for table `models`
 --
 ALTER TABLE `models`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `models_types`
@@ -378,7 +384,7 @@ ALTER TABLE `models_types`
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `reservationID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `reservationID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `status`
@@ -390,7 +396,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

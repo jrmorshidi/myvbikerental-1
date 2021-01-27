@@ -107,7 +107,6 @@ if (isset($_GET['model'])) {
 
 $result_types = $connect->query($sql_types . $filter_sql_models . ' ORDER BY models_types.type');
 $result_brands = $connect->query($sql_brands . $filter_sql_models . ' ORDER BY brands.brand');
-$result_models_list = $connect->query($sql_models . $filter_sql_models . ' ORDER BY brands.brand');
 $result_models_count = $connect->query($sql_models_count . $filter_sql_models);
 
 if (!empty($result_models_count) && $result_models_count->num_rows > 0) {
@@ -137,8 +136,9 @@ if (isset($_GET['page'])) {
 	$page = $_GET['page'];
 }
 
-$entity = 2;
+$entity = 9;
 $start = ($page - 1) * $entity;
+$max_page = round($max_entity / $entity, 0, PHP_ROUND_HALF_UP);
 $result_models = $connect->query($sql_models . $filter_sql_models . " LIMIT $start,$entity");
 
 ?>
@@ -196,24 +196,6 @@ $result_models = $connect->query($sql_models . $filter_sql_models . " LIMIT $sta
 								</div>
 							</div>
 							<div class="content-nav-section">
-								<div class="content-nav-title">Models</div>
-								<div class="content-nav-list">
-									<?php
-									if (!empty($result_models_list) && $result_models_list->num_rows > 0) {
-										// output data of each row
-										while ($row = $result_models_list->fetch_assoc()) {
-									?>
-											<div class="custom-control custom-checkbox custom-checkbox-sunshine">
-												<input type="checkbox" class="custom-control-input custom-control-input-sunshine" id="<?php echo $row['model'] ?>" name="model[]" value="<?php echo $row['model'] ?>" <?php if ($model && in_array($row['model'], $model)) {
-																																																							echo 'checked';
-																																																						} ?>>
-												<label class="custom-control-label" for="<?php echo $row['model'] ?>"><?php echo $row['model'] ?></label>
-											</div>
-									<?php }
-									} ?>
-								</div>
-							</div>
-							<div class="content-nav-section">
 								<div class="content-nav-title">Price Range</div>
 								<div class="content-nav-field">
 									<div class="row mb-3">
@@ -263,7 +245,7 @@ $result_models = $connect->query($sql_models . $filter_sql_models . " LIMIT $sta
 								</div>
 							</div>
 							<?php
-							if ($max_entity > 0) {
+							if ($max_page > 1) {
 							?>
 							<div class="row">
 								<nav aria-label="Page navigation">
@@ -274,7 +256,6 @@ $result_models = $connect->query($sql_models . $filter_sql_models . " LIMIT $sta
 											<a class="page-link" href="javascript:void(0);" tabindex="-1" aria-disabled="true"><<</a>
 										</li>
 										<?php
-										$max_page = round($max_entity / $entity, 0, PHP_ROUND_HALF_UP);
 										for ($i = 1; $i < $max_page + 1; $i++) {
 										?>
 											<li class="page-item<?php if ($page === "$i") {
@@ -328,7 +309,7 @@ $result_models = $connect->query($sql_models . $filter_sql_models . " LIMIT $sta
 								echo $max_entity;
 							} ?> of <?php echo $max_entity; ?> entries</div>
 							<?php
-							if ($max_entity > 0) {
+							if ($max_page > 1) {
 							?>
 								<div class="row">
 									<nav aria-label="Page navigation">
@@ -339,7 +320,6 @@ $result_models = $connect->query($sql_models . $filter_sql_models . " LIMIT $sta
 												<a class="page-link" href="javascript:void(0);" tabindex="-1" aria-disabled="true"><<</a>
 											</li>
 											<?php
-											$max_page = round($max_entity / $entity, 0, PHP_ROUND_HALF_UP);
 											for ($i = 1; $i < $max_page + 1; $i++) {
 											?>
 												<li class="page-item<?php if ($page === "$i") {

@@ -103,7 +103,6 @@ if(isset($_GET['editid']))
 
 						<div class="col-sm-12">
 							<input type="submit" class="btn btn-raised g-bg-cyan" name="submit" id="submit" value="Submit" />
-
 						</div>
 					</div>
 

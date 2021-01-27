@@ -14,6 +14,9 @@ if (isset($_SESSION['userID'])) {
 		header('Location: ' . $root . 'account/userAccount.php');
 	}
 }
+else if (isset($_SESSION['adminID'])){
+	include 'logout.php';
+}
 ?>
 <!-- header section -->
 <!DOCTYPE html>
@@ -39,10 +42,14 @@ if (isset($_SESSION['userID'])) {
 <body class="theme-deep-orange login-page authentication">
 	<!-- header section -->
 	<?php
-
-	$err = '';
 	if (isset($_POST['submit'])) {
-		$sql = "SELECT * FROM users WHERE username='$_POST[loginid]' AND password='$_POST[password]'";
+		$err = '';
+		$username = $_POST['loginid'];
+		$password = $_POST['password'];
+		$password = md5($password);
+		
+		// Verify that user is in database
+		$sql = "SELECT * FROM users WHERE username = '$username'";
 		$qsql = mysqli_query($connect, $sql);
 		if (mysqli_num_rows($qsql) == 1) {
 			$rslogin = mysqli_fetch_array($qsql);
@@ -54,8 +61,7 @@ if (isset($_SESSION['userID'])) {
 			}
 		} else {
 			$err = "<div class='alert alert-danger'>
-		<strong>Oh !</strong> Change a few things up and try submitting again.
-	</div>";
+					<strong>Oh !</strong> Change a few things up and try submitting again.</div>";
 		}
 	}
 
@@ -84,6 +90,8 @@ if (isset($_SESSION['userID'])) {
 						</div>
 						<div class="text-center"><a href="forgot-password.html">Forgot Password?</a></div>
 						<div class="text-center"><a href="signup.php">Don't have an account? Sign up now</a></div>
+						<br>
+						<div class="text-center"><a href="loginAdmin.php">Sign in as Admin</a></div>		
 					</div>
 				</form>
 			</div>

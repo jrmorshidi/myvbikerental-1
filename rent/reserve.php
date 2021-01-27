@@ -38,8 +38,8 @@ if (isset($_POST['reserve'])) {
         ) {
             $discount = 0;
         } else {
-            // rainny day: discount rate = 15%
-            $discount = 0.15;
+            // rainny day: discount rate = 50%
+            $discount = 0.5;
         }
         // store in multi array [date][dicount rate]
         $discountList[$a] = array($date, $discount);
@@ -54,19 +54,19 @@ if (isset($_POST['reserve'])) {
         }
     }
     // cal price after discount
-    // discount showed if user choose within 16 days
+    // discount showed if user choose within 15 days
     $discount = 0;
     if ($count >= 0) {
         $diff_count = $_SESSION['diff'] + $count;
         // Condition 1: StartDate within forecast and Dropdate within forecast           
-        if ($diff_count <= 16) {  
-            for ($i = $count; $i < $diff_count; $i++) {
+        if ($diff_count <= 15) {  
+            for ($i = $count; $i < $diff_count+1; $i++) {
                 echo $discount . ' - ' . $discountList[$i][1] . '<br>';
                 $discount = $discount + ($_SESSION['bikePrice'] * $discountList[$i][1]);
             }
         } else { // Condition 2: StartDate within forecast and Dropdate later than forecast 
             $nonForecastDay = $diff - 15 + $count;
-            for ($i = $count; $i < 16; $i++) {
+            for ($i = $count; $i < 15; $i++) {
                 $discount = $discount + ($_SESSION['bikePrice'] * $discountList[$i][1]);
             }
         }

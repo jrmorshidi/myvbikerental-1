@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2021 at 09:54 AM
+-- Generation Time: Jan 27, 2021 at 11:27 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.3
 
@@ -66,10 +66,10 @@ INSERT INTO `bikes` (`ID`, `model`, `plate_no`, `status`) VALUES
 (2, 1, 'WBB4632', 2),
 (3, 2, 'WA3414F', 3),
 (4, 2, 'VA1573', 4),
-(5, 4, 'WTQ456', 1),
-(6, 4, 'WXQ1670', 1),
-(7, 3, 'VTX9254', 1),
-(8, 5, 'VBR7683', 1),
+(5, 4, 'WTQ456', 2),
+(6, 4, 'WXQ1670', 2),
+(7, 3, 'VTX9254', 2),
+(8, 5, 'VBR7683', 2),
 (9, 5, 'VTW6124', 1),
 (10, 6, 'WT8382J', 1),
 (11, 6, 'WG2147B', 1),
@@ -176,14 +176,14 @@ CREATE TABLE `models` (
 INSERT INTO `models` (`ID`, `model`, `product_code`, `type`, `brand`, `year_of_production`, `engine_volume`, `horsepower`, `fuel_consumption`, `price`, `img`) VALUES
 (1, 'Z750', 'KWSKZ750', 1, 1, 2010, '748.00', '106.00', '19.00', '20.00', '2010-Kawasaki-Z750-White.jpg'),
 (2, 'GSX-S1000', 'SZKGSXS1000', 1, 3, 2015, '999.00', '151.00', '17.00', '25.00', 'Suzuki-GSX-S1000.jpg'),
-(3, 'Wave Alpha', 'HDWA2020', 1, 2, 2020, '109.00', '5.00', '4.00', '50.00', 'honda-wave-alpha.jpg'),
-(4, 'NVX', 'YMHNVX2019', 2, 4, 2020, '155.00', '14.70', '12.00', '24.00', 'Yamaha-NVX.jpg'),
-(5, 'XMAX250', 'YMHXMAX456', 2, 4, 2020, '250.00', '22.50', '10.00', '45.00', 'Yamaha-XMAX 250.jpg'),
-(6, 'Like 150', 'KYC15000', 2, 5, 2020, '149.00', '7.24', '8.00', '48.00', 'Kymco-Like-150.jpg'),
+(3, 'Wave Alpha', 'HDWA2020', 4, 2, 2020, '109.00', '5.00', '4.00', '50.00', 'honda-wave-alpha.jpg'),
+(4, 'NVX', 'YMHNVX2019', 4, 4, 2020, '155.00', '14.70', '12.00', '24.00', 'Yamaha-NVX.jpg'),
+(5, 'XMAX250', 'YMHXMAX456', 4, 4, 2020, '250.00', '22.50', '10.00', '45.00', 'Yamaha-XMAX 250.jpg'),
+(6, 'Like 150', 'KYC15000', 6, 5, 2020, '149.00', '7.24', '8.00', '48.00', 'Kymco-Like-150.jpg'),
 (7, 'Vulcan S', 'KWSKVS75137', 3, 1, 2020, '649.00', '60.16', '55.00', '150.00', 'kawasaki-vulcan-s.jpg'),
 (8, 'Rebel', 'HDR15256', 3, 2, 2019, '471.03', '45.50', '67.00', '200.00', 'Honda-Rebel.jpg'),
-(9, 'Ego Solariz', 'YMHES573478', 2, 4, 2019, '125.00', '9.30', '13.00', '17.00', 'Yamaha-Ego-Solariz.jpg'),
-(10, 'Karisma 125', 'MK125000', 3, 6, 2020, '124.66', '9.40', '36.95', '39.00', 'Modenas-Karisma-125.jpg');
+(9, 'Ego Solariz', 'YMHES573478', 5, 4, 2019, '125.00', '9.30', '13.00', '17.00', 'Yamaha-Ego-Solariz.jpg'),
+(10, 'Karisma 125', 'MK125000', 5, 6, 2020, '124.66', '9.40', '36.95', '39.00', 'Modenas-Karisma-125.jpg');
 
 -- --------------------------------------------------------
 
@@ -203,7 +203,10 @@ CREATE TABLE `models_types` (
 INSERT INTO `models_types` (`ID`, `type`) VALUES
 (1, 'Sport'),
 (2, 'Tourist'),
-(3, 'Cruiser');
+(3, 'Cruiser'),
+(4, 'Standard/Naked'),
+(5, 'Scooter'),
+(6, 'Retro');
 
 -- --------------------------------------------------------
 
@@ -398,13 +401,13 @@ ALTER TABLE `models`
 -- AUTO_INCREMENT for table `models_types`
 --
 ALTER TABLE `models_types`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `reservationID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `reservationID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `status`

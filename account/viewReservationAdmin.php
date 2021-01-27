@@ -45,7 +45,7 @@ include $root . "account/adFormHeader.php";
 
       <thead>
         <tr>
-          <th>No.</th>
+          <th>ID</th>
           <th>User</th>
           <th>Start Date &  Time</th>
           <th>End Date &  Time</th>
@@ -105,11 +105,14 @@ include $root . "account/adFormHeader.php";
                 if($rs['status'] == 4)
                 {
                       //  echo "  <a href='cancelReservation.php?delid=$rs[reservationID]'>Cancel</a>";
-                       echo "<a onClick=\"javascript: return confirm('Please confirm deletion');\" href='cancelReservation.php?delid=$rs[reservationID]'>Cancel</a>"; //use double quotes for js inside php!                       
+                       echo "<a onClick=\"javascript: return confirm('Please confirm deletion');\" href='cancelReservation.php?delid=$rs[reservationID]'>Cancel</a>";                    
                       //  echo "<button type='button' class='deleteProductBtn'>Delete</button>";
                     //    echo "<form action='cancelReservation.php?delid=$rs[reservationID] method='POST'>
                     //    <input type='submit' class='deleteProductBtn' name='Cancel' value = 'Cancel'>
                     //  </form>";
+                }
+                else{
+                  echo "<a href='reviewReservation.php?revid=$rs[reservationID]'>Review</a>";
                 }
                echo "</center></td></tr>";
 		}
